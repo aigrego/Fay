@@ -199,7 +199,7 @@ new Vue({
         },
         getData() {
             let _this = this;
-            let url = "http://127.0.0.1:5000/api/get-data";
+            let url = "/api/get-data";
             let xhr = new XMLHttpRequest()
             xhr.open("post", url)
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
@@ -272,7 +272,7 @@ new Vue({
             }
         },
         postData() {
-            let url = "http://127.0.0.1:5000/api/submit";
+            let url = "/api/submit";
             let send_data = {
                 "config": {
                     "source": {
@@ -349,7 +349,7 @@ new Vue({
         postStartLive() {
             this.postData()
             this.live_state = 2
-            let url = "http://127.0.0.1:5000/api/start-live";
+            let url = "/api/start-live";
             let xhr = new XMLHttpRequest()
             xhr.open("post", url)
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
@@ -357,7 +357,7 @@ new Vue({
         },
         postStopLive() {
             this.live_state = 3
-            let url = "http://127.0.0.1:5000/api/stop-live";
+            let url = "/api/stop-live";
             let xhr = new XMLHttpRequest()
             xhr.open("post", url)
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
