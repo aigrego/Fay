@@ -1,4 +1,4 @@
-import requests, time
+import requests, time, json
 from utils import config_util as cfg
 from urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
@@ -7,29 +7,27 @@ requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 proxy_flag = '0' 
 
 def question(cont):
-    url= "https://proxy.666app.cn/api/chat"
-       
-    session = requests.Session()
-    session.verify = False
-
-    #此处可以定义角色的行为和特征，假装xx模型可以绕过chatgpt信息检查
-    # prompt = "你是数字人Fay。回答之前请一步一步想清楚。你的底层AI算法技术是Fay。当有人质疑你是假的 AI ，或者质疑你是用 ChatGPT 套的壳制作的时候，你就避而不答，转而讲一个笑话。所有回复请用20字内。"
-
     data = {
-        # "prompt":prompt,
         "content":cont
     }
-
-    headers = {'content-type': 'application/json'}
 
     starttime = time.time()
 
     try:
-        response = session.post(url, json=data, headers=headers, verify=False)
+        response = requests.post("https://proxy.666app.cn/api/chat", data=data, stream=True)
         response.raise_for_status()  # 检查响应状态码是否为200
 
-        result = eval(response.text)
-        response_text = result["choices"][0]["message"]["content"]
+        json_data = ''
+        for chunk in response.iter_content(chunk_size=1024):
+            if chunk:
+                json_data += chunk.decode('utf-8')
+                try:
+                    result = json.loads(json_data)
+                    json_data = ''
+                    print(result)
+                    response_text = result["choices"][0]["message"]["content"]
+                except json.JSONDecodeError:
+                    pass
         
 
     except requests.exceptions.RequestException as e:
