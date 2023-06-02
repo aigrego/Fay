@@ -43,25 +43,23 @@ def send_for_answer(msg,sendto):
             cfg.load_config()
             if sendto == 2:
                 text = nlp_gpt.question(msg)
+            elif cfg.key_chat_module == 'xfaiui':
+                text = xf_aiui.question(msg)
+            elif cfg.key_chat_module == 'yuan':
+                text = yuan_1_0.question(msg)
+            elif cfg.key_chat_module == 'chatgpt':
+                text = chatgpt.question(msg)
+            elif cfg.key_chat_module == 'rasa':
+                textlist = nlp_rasa.question(msg)
+                text = textlist[0]['text']
             else:
-                if cfg.key_chat_module == 'xfaiui':
-                    text = xf_aiui.question(msg)
-                elif cfg.key_chat_module == 'yuan':
-                    text = yuan_1_0.question(msg)
-                elif cfg.key_chat_module == 'chatgpt':
-                    text = chatgpt.question(msg)
-                elif cfg.key_chat_module == 'rasa':
-                    textlist = nlp_rasa.question(msg)
-                    text = textlist[0]['text']    
-                
+                raise RuntimeError('讯飞key、yuan key、chatgpt key都没有配置！')    
 
-                else:
-                    raise RuntimeError('讯飞key、yuan key、chatgpt key都没有配置！')    
-                util.log(1, '自然语言处理完成. 耗时: {} ms'.format(math.floor((time.time() - tm) * 1000)))
-                if text == '哎呀，你这么说我也不懂，详细点呗' or text == '':
-                    util.log(1, '[!] 自然语言无语了！')
-                    text = '哎呀，你这么说我也不懂，详细点呗'
-                    # wsa_server.get_web_instance().add_cmd({"panelMsg": ""})
+            util.log(1, '自然语言处理完成. 耗时: {} ms'.format(math.floor((time.time() - tm) * 1000)))
+            if text == '哎呀，你这么说我也不懂，详细点呗' or text == '':
+                util.log(1, '[!] 自然语言无语了！')
+                text = '哎呀，你这么说我也不懂，详细点呗'
+                # wsa_server.get_web_instance().add_cmd({"panelMsg": ""})
                     
         except BaseException as e:
             print(e)
