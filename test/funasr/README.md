@@ -22,7 +22,7 @@ pip install ./FunASR(若editdistance编译不通过，请手动安装 pip instal
 2、python -u ASR_server.py --host "0.0.0.0" --port 10197 --ngpu 0 --model ./data/speech_paraformer-large-contextual_asr_nat-zh-cn-16k-common-vocab8404
 
 ## Fay connect
-更改fay/system.conf配置项，并重新启动fay.
+复制fay/server.example.conf文件重命名为server.conf，然后修改对应配置项并重新启动fay.
 
 https://www.bilibili.com/video/BV1qs4y1g74e/?share_source=copy_web&vd_source=64cd9062f5046acba398177b62bea9ad
 

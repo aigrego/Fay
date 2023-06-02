@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+.DS_Store
+
 # C extensions
 *.so
 
@@ -29,6 +31,10 @@ share/python-wheels/
 *.egg
 MANIFEST
 *.db
+server.conf
+server.dev.conf
+server.prod.conf
+server.online.conf
 
 # PyInstaller
 #  Usually these files are written by a python script from a template

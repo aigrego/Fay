@@ -80,6 +80,7 @@ def send_for_answer(msg,sendto):
                   wsa_server.get_web_instance().add_cmd({"panelReply": {"type":"fay","content":textlist[i]['text']}})
                   i+= 1
         return text
+        
 class FeiFei:
     def __init__(self):
         pygame.mixer.init()

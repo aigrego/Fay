@@ -53,7 +53,7 @@ def load_config():
     global local_asr_port
 
     system_config = ConfigParser()
-    system_config.read('system.conf', encoding='UTF-8')
+    system_config.read('server.conf', encoding='UTF-8')
     key_ali_nls_key_id = system_config.get('key', 'ali_nls_key_id')
     key_ali_nls_key_secret = system_config.get('key', 'ali_nls_key_secret')
     key_ali_nls_app_key = system_config.get('key', 'ali_nls_app_key')

@@ -86,7 +86,7 @@ UE5工程：https://github.com/xszyou/fay-ue5
 ├── main.py					# 程序主入口
 ├── fay_booter.py			# 核心启动模块
 ├── config.json				# 控制器配置文件
-├── system.conf				# 系统配置文件
+├── server.conf		        # 系统产品环境配置
 ├── ai_module
 │   ├── ali_nls.py			# 阿里云 实时语音
 │   ├── ms_tts_sdk.py       # 微软 文本转语音
@@ -141,7 +141,7 @@ pip install -r requirements.txt
 
 ### **配置应用密钥**
 + 查看 [AI 模块](#ai-模块)
-+ 浏览链接，注册并创建应用，将应用密钥填入 `./system.conf` 中
++ 浏览链接，注册并创建应用，将应用密钥填入 `./server.conf` 中
 
 ### **启动**
 启动Fay控制器
