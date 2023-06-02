@@ -1,4 +1,5 @@
 import requests, time, json
+from utils import util, storer, config_util
 from urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 
@@ -24,16 +25,16 @@ def question(cont):
                     try:
                         result = json.loads(chunk_data)
                         response_text += result["choices"][0]["delta"]["content"]
-                        print('解析数据块: %s' % result["choices"][0]["delta"]["content"])
+                        util.log(1, '解析数据块: %s' % result["choices"][0]["delta"]["content"])
                     except json.JSONDecodeError:
-                        print('解析完成: %s' % chunk_data)
+                        util.log(1, '解析完成: %s' % chunk_data)
 
     except requests.exceptions.RequestException as e:
-        print(f"请求失败: {e}")
+        util.log(1, "请求失败: %s" % e)
         response_text = "抱歉，我现在太忙了，休息一会，请稍后再试。"
 
 
-    print("接口调用耗时 :" + str(time.time() - starttime))
+    util.log(1, "接口调用耗时 :" + str(time.time() - starttime))
 
     return response_text
 
